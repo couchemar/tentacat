@@ -38,4 +38,14 @@ defmodule Tentacat.Users.Followers do
   def followers(user_name) when is_binary(user_name) do
     get "users/#{user_name}/followers"
   end
+
+  @spec following(binary, Client.auth) :: :jsx.json_term
+  def following(user_name, auth) when is_binary(user_name) when is_list(auth) do
+    get "user/following/#{user_name}", auth
+  end
+
+  @spec following(binary, binary) :: :jsx.json_term
+  def following(user_name, target_user_name) when is_binary(user_name) when is_binary(target_user_name) do
+    get "users/#{user_name}/following/#{target_user_name}"
+  end
 end
